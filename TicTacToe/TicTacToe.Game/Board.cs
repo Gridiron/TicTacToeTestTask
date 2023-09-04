@@ -57,6 +57,56 @@ namespace TicTacToe.Game
 
         public bool IsWin(char playerSymbol)
         {
+            for (int i = 0; i < Size; i++)
+            {
+                bool rowWin = true;
+                bool colWin = true;
+
+                for (int j = 0; j < Size; j++)
+                {
+                    // Check rows
+                    if (Grid[i, j] != playerSymbol)
+                    {
+                        rowWin = false;
+                    }
+
+                    // Check columns
+                    if (Grid[j, i] != playerSymbol)
+                    {
+                        colWin = false;
+                    }
+                }
+
+                if (rowWin || colWin)
+                {
+                    return true;
+                }
+            }
+
+            // Check diagonals
+            bool topLeftToBottomRightDiagonalWin = true;
+            bool topRightToBottomLeftDiagonalWin = true;
+            for (int i = 0; i < Size; i++)
+            {
+                // Check diagonal from top-left to bottom-right
+                if (Grid[i, i] != playerSymbol)
+                {
+                    topLeftToBottomRightDiagonalWin = false;
+                }
+
+                // Check diagonal from top-right to bottom-left
+                if (Grid[i, Size - 1 - i] != playerSymbol)
+                {
+                    topRightToBottomLeftDiagonalWin = false;
+                }
+            }
+
+            if (topLeftToBottomRightDiagonalWin || topRightToBottomLeftDiagonalWin)
+            {
+                return true;
+            }
+
+            // No win condition found
             return false;
         }
 
