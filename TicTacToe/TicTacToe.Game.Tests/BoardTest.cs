@@ -94,5 +94,91 @@ namespace TicTacToe.Game.Tests
             // Assert
             result.Should().BeFalse();
         }
+
+        [Fact]
+        public void IsWin_WhenThereIsARowWin_ThenReturnsTrue()
+        {
+            // Arrange
+            Board board = new Board(3);
+
+            board.MakeMove(0, 0, 'X');
+            board.MakeMove(0, 1, 'X');
+            board.MakeMove(0, 2, 'X');
+
+            // Act
+            bool isWinX = board.IsWin('X');
+
+            // Assert
+            isWinX.Should().BeTrue();
+        }
+
+        [Fact]
+        public void IsWin_WhenThereIsAColumnWin_ThenReturnsTrue()
+        {
+            // Arrange
+            Board board = new Board(3);
+
+            board.MakeMove(0, 1, 'O');
+            board.MakeMove(1, 1, 'O');
+            board.MakeMove(2, 1, 'O');
+
+            // Act
+            bool isWinO = board.IsWin('O');
+
+            // Assert
+            isWinO.Should().BeTrue();
+        }
+
+        [Fact]
+        public void IsWin_WhenThereIsADiagonalWin_ThenReturnsTrue()
+        {
+            // Arrange
+            Board board = new Board(3);
+
+            board.MakeMove(0, 0, 'X');
+            board.MakeMove(1, 1, 'X');
+            board.MakeMove(2, 2, 'X');
+
+            // Act
+            bool isWinX = board.IsWin('X');
+
+            // Assert
+            isWinX.Should().BeTrue();
+        }
+
+        [Fact]
+        public void IsWin_WhenBoardIsEmpty_ThenReturnsFalse()
+        {
+            // Arrange
+            Board board = new Board(3);
+
+            // Act
+            bool isWinX = board.IsWin('X');
+            bool isWinO = board.IsWin('O');
+
+            // Assert
+            isWinX.Should().BeFalse();
+            isWinO.Should().BeFalse();
+        }
+
+        [Fact]
+        public void IsWin_WhenBoardIsPartiallyFilledAndNoWin_ThenReturnsFalse()
+        {
+            // Arrange
+            Board board = new Board(3);
+
+            board.MakeMove(0, 0, 'X');
+            board.MakeMove(0, 1, 'O');
+            board.MakeMove(1, 1, 'X');
+            board.MakeMove(1, 0, 'O');
+
+            // Act
+            bool isWinX = board.IsWin('X');
+            bool isWinO = board.IsWin('O');
+
+            // Assert
+            isWinX.Should().BeFalse();
+            isWinO.Should().BeFalse();
+        }
     }
 }
