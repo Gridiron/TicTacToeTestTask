@@ -13,8 +13,21 @@ namespace TicTacToe.Game
 
         public Board(int size)
         {
+            Size = size;
+            Grid = new char[size, size];
+            InitializeBoard();
         }
 
+        private void InitializeBoard()
+        {
+            for (int row = 0; row < Size; row++)
+            {
+                for (int col = 0; col < Size; col++)
+                {
+                    Grid[row, col] = ' ';
+                }
+            }
+        }
 
         public bool IsCellEmpty(int row, int col)
         {
