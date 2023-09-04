@@ -27,31 +27,31 @@ namespace TicTacToe.Game
         {
             for (int row = 0; row < Size; row++)
             {
-                for (int col = 0; col < Size; col++)
+                for (int column = 0; column < Size; column++)
                 {
-                    Grid[row, col] = ' ';
+                    Grid[row, column] = ' ';
                 }
             }
         }
 
-        public bool IsCellEmpty(int row, int col)
+        public bool IsCellEmpty(int row, int column)
         {
             return true;
         }
 
-        public bool MakeMove(int row, int col, char playerSymbol)
+        public bool MakeMove(int row, int column, char playerSymbol)
         {
-            if (row < 0 || row >= Size || col < 0 || col >= Size)
+            if (row < 0 || row >= Size || column < 0 || column >= Size)
             {
                 return false;
             }
 
-            if (Grid[row, col] != ' ')
+            if (Grid[row, column] != ' ')
             {
                 return false; 
             }
 
-            Grid[row, col] = playerSymbol;
+            Grid[row, column] = playerSymbol;
             return true;
         }
 
@@ -60,7 +60,7 @@ namespace TicTacToe.Game
             for (int i = 0; i < Size; i++)
             {
                 bool rowWin = true;
-                bool colWin = true;
+                bool columnWin = true;
 
                 for (int j = 0; j < Size; j++)
                 {
@@ -73,11 +73,11 @@ namespace TicTacToe.Game
                     // Check columns
                     if (Grid[j, i] != playerSymbol)
                     {
-                        colWin = false;
+                        columnWin = false;
                     }
                 }
 
-                if (rowWin || colWin)
+                if (rowWin || columnWin)
                 {
                     return true;
                 }
@@ -110,7 +110,7 @@ namespace TicTacToe.Game
             return false;
         }
 
-        public bool IsDraw()
+        public bool IsFull()
         {
             return true; 
         }
