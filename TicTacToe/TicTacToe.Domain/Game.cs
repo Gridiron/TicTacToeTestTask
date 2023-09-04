@@ -7,7 +7,7 @@
 
         public Player CurrentPlayer { get; private set; }
         public Board Board { get; }
-        public bool IsGameOver { get; private set; }
+        public bool IsGameOver { get; private set; } = false;
         public Player Winner { get; private set; }
 
         public Game(Player player1, Player player2, int boardSize)
@@ -23,14 +23,40 @@
             CurrentPlayer = player1;
         }
 
-        public void MakeMove(int row, int column)
+        public bool MakeMove(int row, int column)
         {
+            if (IsGameOver)
+            {
+                return false;
+            }
 
+            var moveResult = Board.MakeMove(row, column, CurrentPlayer.Symbol);
+
+            if (!moveResult)
+            {
+                return false;
+            }
+
+            if (Board.IsWin(CurrentPlayer.Symbol))
+            {
+                IsGameOver = true;
+                Winner = CurrentPlayer;
+            }
+            else if (Board.IsFull())
+            {
+                IsGameOver = true;
+            }
+            else
+            {
+                ToggleCurrentPlayer();
+            }
+
+            return true;
         }
 
         private void ToggleCurrentPlayer()
         {
-
+            CurrentPlayer = (CurrentPlayer == _player1) ? _player2 : _player1;
         }
     }
 }
