@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
+using TicTacToe.Domain;
 
-namespace TicTacToe.Game.Tests
+namespace TicTacToe.Tests
 {
     public class BoardTest
     {

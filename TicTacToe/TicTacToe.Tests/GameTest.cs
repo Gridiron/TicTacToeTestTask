@@ -1,7 +1,7 @@
 using FluentAssertions;
-using System.Drawing;
+using TicTacToe.Domain;
 
-namespace TicTacToe.Game.Tests
+namespace TicTacToe.Tests
 {
     public class GameTest
     {

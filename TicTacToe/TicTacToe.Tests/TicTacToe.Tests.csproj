@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TicTacToe.Game\TicTacToe.Game.csproj" />
+    <ProjectReference Include="..\TicTacToe.Domain\TicTacToe.Domain.csproj" />
   </ItemGroup>
 
 </Project>

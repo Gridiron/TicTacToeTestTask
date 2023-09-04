@@ -1,4 +1,4 @@
-﻿namespace TicTacToe.Game
+﻿namespace TicTacToe.Domain
 {
     public class Game
     {
