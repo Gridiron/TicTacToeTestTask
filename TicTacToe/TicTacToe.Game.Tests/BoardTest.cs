@@ -4,6 +4,13 @@ namespace TicTacToe.Game.Tests
 {
     public class BoardTest
     {
+        private readonly Board _board;
+
+        public BoardTest()
+        {
+            _board = new Board(3);
+        }
+
         [Fact]
         public void Constructor_WhenValidSize_ThenInitializesGridWithSpaces()
         {
@@ -39,7 +46,6 @@ namespace TicTacToe.Game.Tests
         public void MakeMove_WhenValidMoveIsMade_ThenUpdatesBoardAndReturnsTrue()
         {
             // Arrange
-            Board board = new Board(3);
             char[,] expectedState = new char[,]
             {
                 { 'X', ' ', ' ' },
@@ -48,10 +54,10 @@ namespace TicTacToe.Game.Tests
             };
 
             // Act
-            bool result = board.MakeMove(0, 0, 'X');
+            bool result = _board.MakeMove(0, 0, 'X');
 
             // Assert
-            board.Grid.Should().BeEquivalentTo(expectedState);
+            _board.Grid.Should().BeEquivalentTo(expectedState);
             result.Should().BeTrue();
         }
 
@@ -59,7 +65,6 @@ namespace TicTacToe.Game.Tests
         public void MakeMove_WhenInvalidMoveIsMade_ThenReturnsFalse()
         {
             // Arrange
-            Board board = new Board(3);
             char[,] expectedState = new char[,]
             {
                 { 'X', ' ', ' ' },
@@ -68,11 +73,11 @@ namespace TicTacToe.Game.Tests
             };
 
             // Act
-            bool moveX = board.MakeMove(0, 0, 'X');
-            bool moveO = board.MakeMove(0, 0, 'O');
+            bool moveX = _board.MakeMove(0, 0, 'X');
+            bool moveO = _board.MakeMove(0, 0, 'O');
 
             // Assert
-            board.Grid.Should().BeEquivalentTo(expectedState);
+            _board.Grid.Should().BeEquivalentTo(expectedState);
             moveX.Should().BeTrue();
             moveO.Should().BeFalse();
         }
@@ -85,11 +90,8 @@ namespace TicTacToe.Game.Tests
         [InlineData(-1, 0)]
         public void MakeMove_WhenRowOrColumnAreInvalid_ThenReturnsFalse(int row, int column)
         {
-            // Arrange
-            Board board = new Board(3);
-
             // Act
-            bool result = board.MakeMove(row, column, 'X');
+            bool result = _board.MakeMove(row, column, 'X');
 
             // Assert
             result.Should().BeFalse();
@@ -99,14 +101,12 @@ namespace TicTacToe.Game.Tests
         public void IsWin_WhenThereIsARowWin_ThenReturnsTrue()
         {
             // Arrange
-            Board board = new Board(3);
-
-            board.MakeMove(0, 0, 'X');
-            board.MakeMove(0, 1, 'X');
-            board.MakeMove(0, 2, 'X');
+            _board.MakeMove(0, 0, 'X');
+            _board.MakeMove(0, 1, 'X');
+            _board.MakeMove(0, 2, 'X');
 
             // Act
-            bool isWinX = board.IsWin('X');
+            bool isWinX = _board.IsWin('X');
 
             // Assert
             isWinX.Should().BeTrue();
@@ -116,14 +116,12 @@ namespace TicTacToe.Game.Tests
         public void IsWin_WhenThereIsAColumnWin_ThenReturnsTrue()
         {
             // Arrange
-            Board board = new Board(3);
-
-            board.MakeMove(0, 1, 'O');
-            board.MakeMove(1, 1, 'O');
-            board.MakeMove(2, 1, 'O');
+            _board.MakeMove(0, 1, 'O');
+            _board.MakeMove(1, 1, 'O');
+            _board.MakeMove(2, 1, 'O');
 
             // Act
-            bool isWinO = board.IsWin('O');
+            bool isWinO = _board.IsWin('O');
 
             // Assert
             isWinO.Should().BeTrue();
@@ -133,14 +131,12 @@ namespace TicTacToe.Game.Tests
         public void IsWin_WhenThereIsADiagonalWin_ThenReturnsTrue()
         {
             // Arrange
-            Board board = new Board(3);
-
-            board.MakeMove(0, 0, 'X');
-            board.MakeMove(1, 1, 'X');
-            board.MakeMove(2, 2, 'X');
+            _board.MakeMove(0, 0, 'X');
+            _board.MakeMove(1, 1, 'X');
+            _board.MakeMove(2, 2, 'X');
 
             // Act
-            bool isWinX = board.IsWin('X');
+            bool isWinX = _board.IsWin('X');
 
             // Assert
             isWinX.Should().BeTrue();
@@ -149,12 +145,9 @@ namespace TicTacToe.Game.Tests
         [Fact]
         public void IsWin_WhenBoardIsEmpty_ThenReturnsFalse()
         {
-            // Arrange
-            Board board = new Board(3);
-
             // Act
-            bool isWinX = board.IsWin('X');
-            bool isWinO = board.IsWin('O');
+            bool isWinX = _board.IsWin('X');
+            bool isWinO = _board.IsWin('O');
 
             // Assert
             isWinX.Should().BeFalse();
@@ -165,16 +158,14 @@ namespace TicTacToe.Game.Tests
         public void IsWin_WhenBoardIsPartiallyFilledAndNoWin_ThenReturnsFalse()
         {
             // Arrange
-            Board board = new Board(3);
-
-            board.MakeMove(0, 0, 'X');
-            board.MakeMove(0, 1, 'O');
-            board.MakeMove(1, 1, 'X');
-            board.MakeMove(1, 0, 'O');
+            _board.MakeMove(0, 0, 'X');
+            _board.MakeMove(0, 1, 'O');
+            _board.MakeMove(1, 1, 'X');
+            _board.MakeMove(1, 0, 'O');
 
             // Act
-            bool isWinX = board.IsWin('X');
-            bool isWinO = board.IsWin('O');
+            bool isWinX = _board.IsWin('X');
+            bool isWinO = _board.IsWin('O');
 
             // Assert
             isWinX.Should().BeFalse();
