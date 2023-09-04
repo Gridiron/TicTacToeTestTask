@@ -76,5 +76,18 @@ namespace TicTacToe.Game.Tests
             moveX.Should().BeTrue();
             moveO.Should().BeFalse();
         }
+
+        [Fact]
+        public void MakeMove_WhenRowIsNegative_ThenReturnsFalse()
+        {
+            // Arrange
+            Board board = new Board(3);
+
+            // Act
+            bool result = board.MakeMove(-1, 0, 'X');
+
+            // Assert
+            result.Should().BeFalse();
+        }
     }
 }

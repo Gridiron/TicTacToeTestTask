@@ -41,6 +41,11 @@ namespace TicTacToe.Game
 
         public bool MakeMove(int row, int col, char playerSymbol)
         {
+            if(row < 0)
+            {
+                return false;
+            }
+
             if(Grid[row, col] != ' ')
             {
                 return false; 
