@@ -39,8 +39,11 @@ namespace TicTacToe.Game
             return true;
         }
 
-        public void MakeMove(int row, int col, char playerSymbol)
+        public bool MakeMove(int row, int col, char playerSymbol)
         {
+            Grid[row, col] = playerSymbol;
+
+            return true;
         }
 
         public bool IsWin(char playerSymbol)
