@@ -77,14 +77,19 @@ namespace TicTacToe.Game.Tests
             moveO.Should().BeFalse();
         }
 
-        [Fact]
-        public void MakeMove_WhenRowIsNegative_ThenReturnsFalse()
+        [Theory]
+        [InlineData(3, 0)]
+        [InlineData(0, 3)]
+        [InlineData(3, 3)]
+        [InlineData(0, -1)]
+        [InlineData(-1, 0)]
+        public void MakeMove_WhenRowOrColumnAreInvalid_ThenReturnsFalse(int row, int column)
         {
             // Arrange
             Board board = new Board(3);
 
             // Act
-            bool result = board.MakeMove(-1, 0, 'X');
+            bool result = board.MakeMove(row, column, 'X');
 
             // Assert
             result.Should().BeFalse();

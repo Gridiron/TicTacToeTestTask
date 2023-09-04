@@ -13,7 +13,7 @@ namespace TicTacToe.Game
 
         public Board(int size)
         {
-            if(size <= 0)
+            if (size <= 0)
             {
                 throw new ArgumentException(nameof(Size));
             }
@@ -41,12 +41,12 @@ namespace TicTacToe.Game
 
         public bool MakeMove(int row, int col, char playerSymbol)
         {
-            if(row < 0)
+            if (row < 0 || row >= Size || col < 0 || col >= Size)
             {
                 return false;
             }
 
-            if(Grid[row, col] != ' ')
+            if (Grid[row, col] != ' ')
             {
                 return false; 
             }
