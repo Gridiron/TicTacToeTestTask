@@ -128,7 +128,27 @@ namespace TicTacToe.Game
 
         public override string ToString()
         {
-            return base.ToString();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < Size; i++)
+            {
+                for (int j = 0; j < Size; j++)
+                {
+                    sb.Append(Grid[i, j]);
+                    if (j < Size - 1)
+                    {
+                        sb.Append(" | ");
+                    }
+                }
+
+                sb.AppendLine();
+                if (i < Size - 1)
+                {
+                    sb.Append(new string('-', Size * 4 - 1));
+                    sb.AppendLine();
+                }
+            }
+
+            return sb.ToString();
         }
     }
 }
