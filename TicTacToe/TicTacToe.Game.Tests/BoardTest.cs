@@ -171,5 +171,41 @@ namespace TicTacToe.Game.Tests
             isWinX.Should().BeFalse();
             isWinO.Should().BeFalse();
         }
+
+        [Fact]
+        public void IsFull_WhenBoardIsFull_ThenReturnsTrue()
+        {
+            // Arrange
+            _board.MakeMove(0, 0, 'X');
+            _board.MakeMove(0, 1, 'O');
+            _board.MakeMove(0, 2, 'X');
+            _board.MakeMove(1, 0, 'O');
+            _board.MakeMove(1, 1, 'X');
+            _board.MakeMove(1, 2, 'O');
+            _board.MakeMove(2, 0, 'X');
+            _board.MakeMove(2, 1, 'O');
+            _board.MakeMove(2, 2, 'X');
+
+            // Act
+            bool isFull = _board.IsFull();
+
+            // Assert: The board is full
+            isFull.Should().BeTrue();
+        }
+
+        [Fact]
+        public void IsFull_WhenBoardIsNotFull_ThenReturnsFalse()
+        {
+            // Arrange
+            _board.MakeMove(0, 0, 'X');
+            _board.MakeMove(0, 1, 'O');
+            _board.MakeMove(0, 2, 'X');
+
+            // Act
+            bool isFull = _board.IsFull();
+
+            // Assert
+            isFull.Should().BeFalse();
+        }
     }
 }
