@@ -54,5 +54,27 @@ namespace TicTacToe.Game.Tests
             board.Grid.Should().BeEquivalentTo(expectedState);
             result.Should().BeTrue();
         }
+
+        [Fact]
+        public void MakeMove_WhenInvalidMoveIsMade_ThenReturnsFalse()
+        {
+            // Arrange
+            Board board = new Board(3);
+            char[,] expectedState = new char[,]
+            {
+                { 'X', ' ', ' ' },
+                { ' ', ' ', ' ' },
+                { ' ', ' ', ' ' }
+            };
+
+            // Act
+            bool moveX = board.MakeMove(0, 0, 'X');
+            bool moveO = board.MakeMove(0, 0, 'O');
+
+            // Assert
+            board.Grid.Should().BeEquivalentTo(expectedState);
+            moveX.Should().BeTrue();
+            moveO.Should().BeFalse();
+        }
     }
 }
