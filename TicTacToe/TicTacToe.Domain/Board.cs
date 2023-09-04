@@ -30,11 +30,6 @@ namespace TicTacToe.Domain
             }
         }
 
-        public bool IsCellEmpty(int row, int column)
-        {
-            return true;
-        }
-
         public bool MakeMove(int row, int column, char playerSymbol)
         {
             if (row < 0 || row >= Size || column < 0 || column >= Size)

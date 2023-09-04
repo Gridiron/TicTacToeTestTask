@@ -13,20 +13,19 @@ namespace TicTacToe
 
             Game game = new Game(player1, player2, 3);
 
-            // Main game loop
             while (!game.IsGameOver)
             {
                 Console.Clear();
                 Console.WriteLine(game.Board.ToString());
 
                 Console.WriteLine($"Current player: {game.CurrentPlayer.Symbol}");
-                Console.Write("Enter row (0-2): ");
+
+                Console.Write($"Enter row (0-{game.Board.Size - 1}): ");
                 int row = int.Parse(Console.ReadLine());
 
-                Console.Write("Enter column (0-2): ");
+                Console.Write($"Enter column (0-{game.Board.Size - 1}): ");
                 int column = int.Parse(Console.ReadLine());
 
-                // Make the move
                 game.MakeMove(row, column);
             }
 
