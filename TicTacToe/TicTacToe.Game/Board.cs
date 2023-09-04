@@ -13,6 +13,11 @@ namespace TicTacToe.Game
 
         public Board(int size)
         {
+            if(size <= 0)
+            {
+                throw new ArgumentException(nameof(Size));
+            }
+
             Size = size;
             Grid = new char[size, size];
             InitializeBoard();
