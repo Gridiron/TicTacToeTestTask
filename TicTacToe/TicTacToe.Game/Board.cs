@@ -112,7 +112,18 @@ namespace TicTacToe.Game
 
         public bool IsFull()
         {
-            return true; 
+            for (int i = 0; i < Size; i++)
+            {
+                for (int j = 0; j < Size; j++)
+                {
+                    if (Grid[i, j] == ' ')
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         public override string ToString()
