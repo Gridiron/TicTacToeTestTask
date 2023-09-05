@@ -8,7 +8,7 @@
         public Player CurrentPlayer { get; private set; }
         public Board Board { get; }
         public bool IsGameOver { get; private set; } = false;
-        public Player Winner { get; private set; }
+        public Player Winner { get; private set; } = new NullPlayer();
 
         public Game(Player player1, Player player2, int boardSize)
         {
