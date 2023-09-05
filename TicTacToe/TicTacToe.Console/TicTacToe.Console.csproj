@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TicTacToe.Application\TicTacToe.Application.csproj" />
+    <ProjectReference Include="..\TicTacToe.Domain\TicTacToe.Domain.csproj" />
     <ProjectReference Include="..\TicTacToe.Presentation\TicTacToe.Presentation.csproj" />
   </ItemGroup>
 

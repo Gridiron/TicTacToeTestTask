@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using TicTacToe.Domain.Constants;
 using TicTacToe.Domain.Exceptions;
 
 namespace TicTacToe.Domain.BoardEntities
@@ -26,7 +27,7 @@ namespace TicTacToe.Domain.BoardEntities
             {
                 for (int column = 0; column < Size; column++)
                 {
-                    Grid[row, column] = ' ';
+                    Grid[row, column] = GameConstants.SPACE_SYMBOL;
                 }
             }
         }
@@ -35,7 +36,7 @@ namespace TicTacToe.Domain.BoardEntities
         {
             if (move.Row >= Size ||
                 move.Column >= Size ||
-                Grid[move.Row, move.Column] != ' ')
+                Grid[move.Row, move.Column] != GameConstants.SPACE_SYMBOL)
             {
                 throw new InvalidMoveException();
             }
@@ -104,7 +105,7 @@ namespace TicTacToe.Domain.BoardEntities
             {
                 for (int j = 0; j < Size; j++)
                 {
-                    if (Grid[i, j] == ' ')
+                    if (Grid[i, j] == GameConstants.SPACE_SYMBOL)
                     {
                         return false;
                     }

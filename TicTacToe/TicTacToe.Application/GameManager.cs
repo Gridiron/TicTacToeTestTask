@@ -1,5 +1,6 @@
 ﻿using TicTacToe.Application.Interfaces;
 using TicTacToe.Domain.BoardEntities;
+using TicTacToe.Domain.Constants;
 using TicTacToe.Domain.Exceptions;
 using TicTacToe.Domain.GameEntities;
 
@@ -18,8 +19,8 @@ namespace TicTacToe.Application
         {
             _userInterface.WriteLine("Welcome to Tic-Tac-Toe!");
 
-            Player player1 = new Player('X');
-            Player player2 = new Player('O');
+            Player player1 = new Player(GameConstants.X_SYMBOL);
+            Player player2 = new Player(GameConstants.O_SYMBOL);
 
             Game game = new Game(player1, player2, size);
 
@@ -48,7 +49,7 @@ namespace TicTacToe.Application
 
             _userInterface.ClearOutput();
 
-            if (game.Winner.Symbol != ' ')
+            if (game.Winner.Symbol != GameConstants.SPACE_SYMBOL)
             {
                 _userInterface.WriteLine($"Player {game.Winner.Symbol} wins!");
             }
