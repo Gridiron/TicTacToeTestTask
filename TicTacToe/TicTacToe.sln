@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe.Console", "TicTacToe\TicTacToe.Console.csproj", "{54D41379-DC28-436C-B247-41DFDC9D9705}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe.Console", "TicTacToe.Console\TicTacToe.Console.csproj", "{54D41379-DC28-436C-B247-41DFDC9D9705}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe.Domain", "TicTacToe.Domain\TicTacToe.Domain.csproj", "{00159355-0D85-451A-AD1A-9430F7022FE1}"
 EndProject
