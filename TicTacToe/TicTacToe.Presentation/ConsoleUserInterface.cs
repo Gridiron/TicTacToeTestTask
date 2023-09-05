@@ -1,4 +1,4 @@
-﻿using TicTacToe.Application;
+﻿using TicTacToe.Application.Interfaces;
 
 namespace TicTacToe.Presentation
 {

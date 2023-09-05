@@ -1,4 +1,6 @@
-﻿namespace TicTacToe.Tests
+﻿using TicTacToe.Domain.BoardEntities;
+
+namespace TicTacToe.Tests.BoardEntities
 {
     public class BoardTest
     {

@@ -1,4 +1,4 @@
-﻿namespace TicTacToe.Application
+﻿namespace TicTacToe.Application.Interfaces
 {
     public interface IUserInterface
     {

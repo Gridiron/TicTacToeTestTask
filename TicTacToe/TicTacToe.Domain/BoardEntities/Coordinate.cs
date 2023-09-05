@@ -1,5 +1,6 @@
-﻿using System;
-namespace TicTacToe.Domain
+﻿using TicTacToe.Domain.Exceptions;
+
+namespace TicTacToe.Domain.BoardEntities
 {
     public class Coordinate
     {
@@ -8,12 +9,12 @@ namespace TicTacToe.Domain
 
         public Coordinate(int row, int column)
         {
-            if(row < 0)
+            if (row < 0)
             {
                 throw new InvalidMoveException();
             }
 
-            if(column < 0)
+            if (column < 0)
             {
                 throw new InvalidMoveException();
             }

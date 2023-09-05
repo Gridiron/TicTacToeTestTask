@@ -1,4 +1,7 @@
-﻿namespace TicTacToe.Domain
+﻿using TicTacToe.Domain.BoardEntities;
+using TicTacToe.Domain.Exceptions;
+
+namespace TicTacToe.Domain.GameEntities
 {
     public class Game
     {
@@ -12,7 +15,7 @@
 
         public Game(Player player1, Player player2, int boardSize)
         {
-            if(player1.Symbol == player2.Symbol)
+            if (player1.Symbol == player2.Symbol)
             {
                 throw new ArgumentException("Players can't have the same symbol");
             }
@@ -48,7 +51,7 @@
 
         private void ToggleCurrentPlayer()
         {
-            CurrentPlayer = (CurrentPlayer == _player1) ? _player2 : _player1;
+            CurrentPlayer = CurrentPlayer == _player1 ? _player2 : _player1;
         }
     }
 }

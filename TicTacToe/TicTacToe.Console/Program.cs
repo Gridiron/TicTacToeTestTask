@@ -1,7 +1,8 @@
 ﻿using TicTacToe.Presentation;
 using TicTacToe.Application;
+using TicTacToe.Application.Interfaces;
 
-namespace TicTacToe
+namespace TicTacToe.Console
 {
     internal class Program
     {

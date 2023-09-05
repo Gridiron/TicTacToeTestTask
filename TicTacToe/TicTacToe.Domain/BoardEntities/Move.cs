@@ -1,4 +1,4 @@
-﻿namespace TicTacToe.Domain
+﻿namespace TicTacToe.Domain.BoardEntities
 {
     public class Move
     {

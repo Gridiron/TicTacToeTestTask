@@ -1,6 +1,7 @@
 ﻿using System.Text;
+using TicTacToe.Domain.Exceptions;
 
-namespace TicTacToe.Domain
+namespace TicTacToe.Domain.BoardEntities
 {
     public record Board
     {
@@ -32,8 +33,8 @@ namespace TicTacToe.Domain
 
         public void MakeMove(Move move)
         {
-            if (move.Row >= Size || 
-                move.Column >= Size || 
+            if (move.Row >= Size ||
+                move.Column >= Size ||
                 Grid[move.Row, move.Column] != ' ')
             {
                 throw new InvalidMoveException();

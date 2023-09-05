@@ -1,4 +1,7 @@
-﻿using TicTacToe.Domain;
+﻿using TicTacToe.Application.Interfaces;
+using TicTacToe.Domain.BoardEntities;
+using TicTacToe.Domain.Exceptions;
+using TicTacToe.Domain.GameEntities;
 
 namespace TicTacToe.Application
 {
@@ -45,7 +48,7 @@ namespace TicTacToe.Application
 
             _userInterface.ClearOutput();
 
-            if (game.Winner != null)
+            if (game.Winner.Symbol != ' ')
             {
                 _userInterface.WriteLine($"Player {game.Winner.Symbol} wins!");
             }
@@ -57,6 +60,5 @@ namespace TicTacToe.Application
             _userInterface.WriteLine("Game over. Press any key to exit.");
             _userInterface.WaitForInput();
         }
-
     }
 }
