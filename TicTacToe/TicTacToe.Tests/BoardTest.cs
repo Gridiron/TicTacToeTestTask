@@ -1,7 +1,4 @@
-﻿using FluentAssertions;
-using TicTacToe.Domain;
-
-namespace TicTacToe.Tests
+﻿namespace TicTacToe.Tests
 {
     public class BoardTest
     {
@@ -55,56 +52,46 @@ namespace TicTacToe.Tests
             };
 
             // Act
-            bool result = _board.MakeMove(0, 0, 'X');
+            _board.MakeMove(new Move(new Coordinate(0, 0), 'X'));
 
             // Assert
             _board.Grid.Should().BeEquivalentTo(expectedState);
-            result.Should().BeTrue();
         }
 
         [Fact]
         public void MakeMove_WhenInvalidMoveIsMade_ThenReturnsFalse()
         {
             // Arrange
-            char[,] expectedState = new char[,]
-            {
-                { 'X', ' ', ' ' },
-                { ' ', ' ', ' ' },
-                { ' ', ' ', ' ' }
-            };
+            _board.MakeMove(new Move(new Coordinate(0, 0), 'X'));
 
             // Act
-            bool moveX = _board.MakeMove(0, 0, 'X');
-            bool moveO = _board.MakeMove(0, 0, 'O');
+            Action makeInvalidMove = () => _board.MakeMove(new Move(new Coordinate(0, 0), 'O'));
 
             // Assert
-            _board.Grid.Should().BeEquivalentTo(expectedState);
-            moveX.Should().BeTrue();
-            moveO.Should().BeFalse();
+            makeInvalidMove.Should().Throw<InvalidMoveException>();
+
         }
 
         [Theory]
         [InlineData(3, 0)]
         [InlineData(0, 3)]
         [InlineData(3, 3)]
-        [InlineData(0, -1)]
-        [InlineData(-1, 0)]
         public void MakeMove_WhenRowOrColumnAreInvalid_ThenReturnsFalse(int row, int column)
         {
             // Act
-            bool result = _board.MakeMove(row, column, 'X');
+            Action makeInvalidMove = () => _board.MakeMove(new Move(new Coordinate(row, column), 'O'));
 
             // Assert
-            result.Should().BeFalse();
+            makeInvalidMove.Should().Throw<InvalidMoveException>();
         }
 
         [Fact]
         public void IsWin_WhenThereIsARowWin_ThenReturnsTrue()
         {
             // Arrange
-            _board.MakeMove(0, 0, 'X');
-            _board.MakeMove(0, 1, 'X');
-            _board.MakeMove(0, 2, 'X');
+            _board.MakeMove(new Move(new Coordinate(0, 0), 'X'));
+            _board.MakeMove(new Move(new Coordinate(0, 1), 'X'));
+            _board.MakeMove(new Move(new Coordinate(0, 2), 'X'));
 
             // Act
             bool isWinX = _board.IsWin('X');
@@ -117,9 +104,9 @@ namespace TicTacToe.Tests
         public void IsWin_WhenThereIsAColumnWin_ThenReturnsTrue()
         {
             // Arrange
-            _board.MakeMove(0, 1, 'O');
-            _board.MakeMove(1, 1, 'O');
-            _board.MakeMove(2, 1, 'O');
+            _board.MakeMove(new Move(new Coordinate(0, 1), 'O'));
+            _board.MakeMove(new Move(new Coordinate(1, 1), 'O'));
+            _board.MakeMove(new Move(new Coordinate(2, 1), 'O'));
 
             // Act
             bool isWinO = _board.IsWin('O');
@@ -132,9 +119,9 @@ namespace TicTacToe.Tests
         public void IsWin_WhenThereIsADiagonalWin_ThenReturnsTrue()
         {
             // Arrange
-            _board.MakeMove(0, 0, 'X');
-            _board.MakeMove(1, 1, 'X');
-            _board.MakeMove(2, 2, 'X');
+            _board.MakeMove(new Move(new Coordinate(0, 0), 'X'));
+            _board.MakeMove(new Move(new Coordinate(1, 1), 'X'));
+            _board.MakeMove(new Move(new Coordinate(2, 2), 'X'));
 
             // Act
             bool isWinX = _board.IsWin('X');
@@ -159,10 +146,10 @@ namespace TicTacToe.Tests
         public void IsWin_WhenBoardIsPartiallyFilledAndNoWin_ThenReturnsFalse()
         {
             // Arrange
-            _board.MakeMove(0, 0, 'X');
-            _board.MakeMove(0, 1, 'O');
-            _board.MakeMove(1, 1, 'X');
-            _board.MakeMove(1, 0, 'O');
+            _board.MakeMove(new Move(new Coordinate(0, 0), 'X'));
+            _board.MakeMove(new Move(new Coordinate(0, 1), 'O'));
+            _board.MakeMove(new Move(new Coordinate(1, 1), 'X'));
+            _board.MakeMove(new Move(new Coordinate(1, 0), 'O'));
 
             // Act
             bool isWinX = _board.IsWin('X');
@@ -177,15 +164,15 @@ namespace TicTacToe.Tests
         public void IsFull_WhenBoardIsFull_ThenReturnsTrue()
         {
             // Arrange
-            _board.MakeMove(0, 0, 'X');
-            _board.MakeMove(0, 1, 'O');
-            _board.MakeMove(0, 2, 'X');
-            _board.MakeMove(1, 0, 'O');
-            _board.MakeMove(1, 1, 'X');
-            _board.MakeMove(1, 2, 'O');
-            _board.MakeMove(2, 0, 'X');
-            _board.MakeMove(2, 1, 'O');
-            _board.MakeMove(2, 2, 'X');
+            _board.MakeMove(new Move(new Coordinate(0, 0), 'X'));
+            _board.MakeMove(new Move(new Coordinate(0, 1), 'O'));
+            _board.MakeMove(new Move(new Coordinate(0, 2), 'X'));
+            _board.MakeMove(new Move(new Coordinate(1, 0), 'O'));
+            _board.MakeMove(new Move(new Coordinate(1, 1), 'X'));
+            _board.MakeMove(new Move(new Coordinate(1, 2), 'O'));
+            _board.MakeMove(new Move(new Coordinate(2, 0), 'X'));
+            _board.MakeMove(new Move(new Coordinate(2, 1), 'O'));
+            _board.MakeMove(new Move(new Coordinate(2, 2), 'X'));
 
             // Act
             bool isFull = _board.IsFull();
@@ -198,9 +185,9 @@ namespace TicTacToe.Tests
         public void IsFull_WhenBoardIsNotFull_ThenReturnsFalse()
         {
             // Arrange
-            _board.MakeMove(0, 0, 'X');
-            _board.MakeMove(0, 1, 'O');
-            _board.MakeMove(0, 2, 'X');
+            _board.MakeMove(new Move(new Coordinate(0, 0), 'X'));
+            _board.MakeMove(new Move(new Coordinate(0, 1), 'O'));
+            _board.MakeMove(new Move(new Coordinate(0, 2), 'X'));
 
             // Act
             bool isFull = _board.IsFull();

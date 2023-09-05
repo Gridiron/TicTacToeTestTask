@@ -23,20 +23,14 @@
             CurrentPlayer = player1;
         }
 
-        public bool MakeMove(int row, int column)
+        public void MakeMove(Coordinate coordinate)
         {
             if (IsGameOver)
             {
-                return false;
+                throw new InvalidMoveException();
             }
 
-            var moveResult = Board.MakeMove(row, column, CurrentPlayer.Symbol);
-
-            if (!moveResult)
-            {
-                return false;
-            }
-
+            Board.MakeMove(new Move(coordinate, CurrentPlayer.Symbol));
             if (Board.IsWin(CurrentPlayer.Symbol))
             {
                 IsGameOver = true;
@@ -50,8 +44,6 @@
             {
                 ToggleCurrentPlayer();
             }
-
-            return true;
         }
 
         private void ToggleCurrentPlayer()

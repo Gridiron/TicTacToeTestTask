@@ -4,7 +4,7 @@ namespace TicTacToe.Domain
 {
     public record Board
     {
-        public int Size { get; }
+        private int Size { get; }
         public char[,] Grid { get; }
 
         public Board(int size)
@@ -30,20 +30,16 @@ namespace TicTacToe.Domain
             }
         }
 
-        public bool MakeMove(int row, int column, char playerSymbol)
+        public void MakeMove(Move move)
         {
-            if (row < 0 || row >= Size || column < 0 || column >= Size)
+            if (move.Row >= Size || 
+                move.Column >= Size || 
+                Grid[move.Row, move.Column] != ' ')
             {
-                return false;
+                throw new InvalidMoveException();
             }
 
-            if (Grid[row, column] != ' ')
-            {
-                return false; 
-            }
-
-            Grid[row, column] = playerSymbol;
-            return true;
+            Grid[move.Row, move.Column] = move.PlayerSymbol;
         }
 
         public bool IsWin(char playerSymbol)

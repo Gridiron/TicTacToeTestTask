@@ -4,7 +4,7 @@ namespace TicTacToe.Application
 {
     public class GameManager
     {
-        private IUserInterface _userInterface;
+        private readonly IUserInterface _userInterface;
 
         public GameManager(IUserInterface userInterface)
         {
@@ -18,7 +18,7 @@ namespace TicTacToe.Application
             Player player1 = new Player('X');
             Player player2 = new Player('O');
 
-            Game game = new Game(player1, player2, 3);
+            Game game = new Game(player1, player2, size);
 
             while (!game.IsGameOver)
             {
@@ -33,7 +33,14 @@ namespace TicTacToe.Application
                 _userInterface.Write($"Enter column (0-{size}): ");
                 int column = int.Parse(_userInterface.GetInput());
 
-                game.MakeMove(row, column);
+                try
+                {
+                    game.MakeMove(new Coordinate(row, column));
+                }
+                catch (InvalidMoveException ex)
+                {
+                    _userInterface.WriteLine($"Invalid move: {ex.Message}");
+                }
             }
 
             _userInterface.ClearOutput();

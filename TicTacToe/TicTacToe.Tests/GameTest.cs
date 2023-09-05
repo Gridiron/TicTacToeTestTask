@@ -1,6 +1,3 @@
-using FluentAssertions;
-using TicTacToe.Domain;
-
 namespace TicTacToe.Tests
 {
     public class GameTest
@@ -30,7 +27,7 @@ namespace TicTacToe.Tests
         public void MakeMove_MoveIsValid_ThenReturnsTrue()
         {
             // Act
-            _game.MakeMove(0, 0);
+            _game.MakeMove(new Coordinate(0, 0));
 
             // Assert
             _game.CurrentPlayer.Should().Be(_player2);
@@ -40,7 +37,7 @@ namespace TicTacToe.Tests
         public void MakeMove_WhenMoveIsValid_ThenTogglesCurrentPlayer()
         {
             // Act
-            _game.MakeMove(0, 0);
+            _game.MakeMove(new Coordinate(0, 0));
 
             // Assert
             _game.CurrentPlayer.Should().Be(_player2);
@@ -50,47 +47,47 @@ namespace TicTacToe.Tests
         public void MakeMove_WhenMoveIsInvalid_ThenReturnsFalse()
         {
             // Arrange
-            _game.MakeMove(0, 0);
+            _game.MakeMove(new Coordinate(0, 0));
 
             // Act
-            bool moveResult = _game.MakeMove(0, 0);
+            Action makeInvalidMove = () => _game.MakeMove(new Coordinate(0, 0));
 
             // Assert
-            moveResult.Should().BeFalse();
+            makeInvalidMove.Should().Throw<InvalidMoveException>();
         }
 
         [Fact]
         public void MakeMove_WhenMoveIsValidAndBoardIsFullAndNoWin_ThenUpdatesIsGameOverReturnsTrue()
         {
             // Arrange
-            _game.MakeMove(0, 0);
-            _game.MakeMove(0, 1);
-            _game.MakeMove(0, 2);
-            _game.MakeMove(1, 0);
-            _game.MakeMove(1, 1);
-            _game.MakeMove(2, 0);
-            _game.MakeMove(1, 2);
-            _game.MakeMove(2, 2);
+            _game.MakeMove(new Coordinate(0, 0));
+            _game.MakeMove(new Coordinate(0, 1));
+            _game.MakeMove(new Coordinate(0, 2));
+            _game.MakeMove(new Coordinate(1, 0));
+            _game.MakeMove(new Coordinate(1, 1));
+            _game.MakeMove(new Coordinate(2, 0));
+            _game.MakeMove(new Coordinate(1, 2));
+            _game.MakeMove(new Coordinate(2, 2));
 
             // Act
-            _game.MakeMove(2, 1);
+            _game.MakeMove(new Coordinate(2, 1));
 
             // Assert
             _game.IsGameOver.Should().BeTrue();
-            _game.Winner.Should().BeNull();
+            _game.Winner.Should().BeEquivalentTo(new NullPlayer());
         }
 
         [Fact]
         public void MakeMove_WhenMoveIsValidAndBoardIsFullAndWin_ThenUpdatesWinnerAndIsGameOverReturnsTrue()
         {
             // Arrange
-            _game.MakeMove(0, 0);
-            _game.MakeMove(1, 0);
-            _game.MakeMove(0, 1);
-            _game.MakeMove(1, 1);
+            _game.MakeMove(new Coordinate(0, 0));
+            _game.MakeMove(new Coordinate(1, 0));
+            _game.MakeMove(new Coordinate(0, 1));
+            _game.MakeMove(new Coordinate(1, 1));
 
             // Act
-            _game.MakeMove(0, 2);
+            _game.MakeMove(new Coordinate(0, 2));
 
             // Assert
             _game.IsGameOver.Should().BeTrue();
